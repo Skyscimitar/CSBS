@@ -7,17 +7,15 @@ package com.csb.csb_test_webview;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
+import com.csb.csb_test_webview.R;
 
 
 public class ListActivity extends FragmentActivity implements comunicate {

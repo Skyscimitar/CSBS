@@ -6,12 +6,12 @@ package com.csb.csb_test_webview;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.csb.csb_test_webview.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -93,7 +93,7 @@ public class Datacollector extends AsyncTask<Void, Void, String> {
                     Article article_dat[] = new Article[articles.size()];
                     article_dat = articles.toArray(article_dat);
                     final Article article_data[] = article_dat;
-                    ArticleAdapter offerAdapter = new ArticleAdapter(activity,R.layout.offer_view,article_data);
+                    ArticleAdapter offerAdapter = new ArticleAdapter(activity, R.layout.offer_view,article_data);
                     final ListView listView = (ListView) activity.findViewById(android.R.id.list);
                     listView.setAdapter(offerAdapter);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -1,17 +1,13 @@
 package com.csb.csb_test_webview;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.csb.csb_test_webview.R;
 
 /**
  * Created by Danny on 07/06/2017.

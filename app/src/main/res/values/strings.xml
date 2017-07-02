@@ -1,5 +1,30 @@
+<!DOCTYPE resources [
+    <!ENTITY defaultMailAdress "\@student.ecp.fr">
+    ]>
+
 <resources>
-    <string name="app_name">csb_test_webView</string>
+    <!-- Global -->
+    <string name="app_name">CS&amp;B</string>
     <string name="action_settings">Settings</string>
+    <string name="defaultMailAdress">&defaultMailAdress;</string>
+    <!-- Item List -->
     <string name="title_activity_item_list">ItemList</string>
+    <!-- Main Activity -->
+    <string name="hintConnexionMail">mail cs</string>
+    <string name="hintConnexionPassword">mot de passe</string>
+    <string name="logCsbDescription">Logo CS&amp;B</string>
+    <string name="inscriptionTextButton">Incription</string>
+    <string name="infoAppAccueil">Achète et vends de tout sur le campus</string>
+    <string name="labelTitreConnexion">Connecte toi pour accéder aux offres !</string>
+    <string name="connexionTextButton">Connexion</string>
+    <string name="connexionError">Login ou mot de passe incorrect</string>
+    <string name="errorSignUp">Erreur lors de l\'inscription, veuillez réessayer.</string>
+    <!-- Sign up -->
+    <string name="title_activity_sign_up">signUp</string>
+    <string name="infoSignUp">Inscrivez-vous sur CSB&amp;S afin d\'échanger partout sur le campus.\nUtilisez votre adresse student.ecp.fr pour vous enregistrer.\nUn mail vous sera envoyé afin de confirmer votre adresse.</string>
+    <string name="labelSignUpMail">Nom utilisateur\n(sans &defaultMailAdress;)</string>
+    <string name="labelSignUpPwd">Mot de passe</string>
+    <string name="buttonSignUp">Créer mon compte</string>
+    <string name="infoPostSignUp">Un mail vous a été envoyé, cliquez sur le lien qu\'il contient pour valider votre compte.\nAdresse utilisée : </string>
+
 </resources>
