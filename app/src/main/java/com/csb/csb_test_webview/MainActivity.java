@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
                                 textError.setVisibility(View.VISIBLE);
                             }else{
                                 textError.setVisibility(View.GONE);
-                                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                                startActivity(intent);
+                                //Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                                //startActivity(intent);
                             }
                         }
                     });
@@ -98,6 +98,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void sendVerificationEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                Toast.makeText(getApplicationContext(), "Signup successful. Verification email sent to "+ user.getEmail(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -120,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("Log Firebase", "error");
                                         errorTextView.setVisibility(View.VISIBLE);
                                     }else{
+                                        sendVerificationEmail();
                                         errorTextView.setVisibility(View.GONE);
                                     }
                                 }
@@ -130,3 +148,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+
