@@ -22,9 +22,14 @@
     <!-- Sign up -->
     <string name="title_activity_sign_up">signUp</string>
     <string name="infoSignUp">Inscrivez-vous sur CSB&amp;S afin d\'échanger partout sur le campus.\nUtilisez votre adresse student.ecp.fr pour vous enregistrer.\nUn mail vous sera envoyé afin de confirmer votre adresse.</string>
-    <string name="labelSignUpMail">Nom utilisateur\n(sans &defaultMailAdress;)</string>
+    <string name="labelSignUpMail">Identifiant mail</string>
     <string name="labelSignUpPwd">Mot de passe</string>
     <string name="buttonSignUp">Créer mon compte</string>
     <string name="infoPostSignUp">Un mail vous a été envoyé, cliquez sur le lien qu\'il contient pour valider votre compte.\nAdresse utilisée : </string>
+    <string name="labelSignUpNom">Nom</string>
+    <string name="labelSignUpPrenom">Prénom</string>
+    <string name="labelSignUpTel">Numéro</string>
+    <string name="hintEmail">Sans &defaultMailAdress;</string>
+
 
 </resources>

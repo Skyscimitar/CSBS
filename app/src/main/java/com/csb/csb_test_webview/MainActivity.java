@@ -17,18 +17,23 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        // Login process
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Sign up activity
         Button signUp = (Button) findViewById(R.id.buttonInscription);
         signUp.setOnClickListener(new View.OnClickListener() {
               @Override
@@ -68,21 +74,11 @@ public class MainActivity extends AppCompatActivity {
                   startActivityForResult(intent, 1);
               }
           });
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d("Log Firebase", "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d("Log Firebase", "onAuthStateChanged:signed_out");
-                }
-            }
-        };
     }
+
+    /**
+     * OVERRIDES
+     **/
 
     @Override
     public void onStart() {
@@ -98,23 +94,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void sendVerificationEmail() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            user.sendEmailVerification()
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                Toast.makeText(getApplicationContext(), "Signup successful. Verification email sent to "+ user.getEmail(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }
-
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -123,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     final String login = data.getStringExtra("login") + getString(R.string.defaultMailAdress);
                     final String pwd = data.getStringExtra("pwd");
+                    final String prenom = data.getStringExtra("prenom");
+                    final String nom = data.getStringExtra("nom");
+                    final String tel = data.getStringExtra("tel");
                     Log.e("test", login + "," + pwd);
                     mAuth.createUserWithEmailAndPassword(login, pwd)
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -138,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                                         errorTextView.setVisibility(View.VISIBLE);
                                     }else{
                                         sendVerificationEmail();
+                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                        writeNewUser(user.getUid(),user.getEmail(),prenom,nom,tel);
                                         errorTextView.setVisibility(View.GONE);
                                     }
                                 }
@@ -146,6 +130,36 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    /****
+     *
+     * CUSTOMS FUNCTIONS
+     *
+     ****/
+
+    // Register function
+    private void writeNewUser(String userId, String email, String prenom, String nom, String tel) {
+        User user = new User(email, prenom, nom, tel);
+        mDatabase.child("users").child(userId).setValue(user);
+    }
+
+    // Send mail verification function
+    public void sendVerificationEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                Toast.makeText(getApplicationContext(), "Signup successful. Verification email sent to "+ user.getEmail(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+
     }
 }
 
