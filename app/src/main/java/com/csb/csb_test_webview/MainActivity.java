@@ -1,7 +1,6 @@
 package com.csb.csb_test_webview;
 
 import android.app.*;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                             // signed in user can be handled in the listener.
                             TextView textError = (TextView) findViewById(R.id.errorLogin);
                             if (!task.isSuccessful()) {
-                                Log.d("Log Firebase", "signInWithEmail:error:" + task.getException().toString());
+                                Log.d("Log Firebase", "signInWithEmail:error:", task.getException());
                                 textError.setVisibility(View.VISIBLE);
                             }else{
                                 textError.setVisibility(View.GONE);
@@ -74,6 +73,21 @@ public class MainActivity extends AppCompatActivity {
                   startActivityForResult(intent, 1);
               }
           });
+
+        // Initialize mAuthListener
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                if (user != null) {
+                                        // User is signed in
+                                                Log.d("Log Firebase", "onAuthStateChanged:signed_in:" + user.getUid());
+                                    } else {
+                                        // User is signed out
+                                                Log.d("Log Firebase", "onAuthStateChanged:signed_out");
+                                    }
+                            }
+         };
     }
 
     /**
@@ -121,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
                                     }else{
                                         sendVerificationEmail();
                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        writeNewUser(user.getUid(),user.getEmail(),prenom,nom,tel);
+                                        if(user != null)
+                                            writeNewUser(user.getUid(),user.getEmail(),prenom,nom,tel);
                                         errorTextView.setVisibility(View.GONE);
                                     }
                                 }
@@ -154,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                Toast.makeText(getApplicationContext(), "Signup successful. Verification email sent to "+ user.getEmail(), Toast.LENGTH_SHORT).show();
+                                if(user != null)
+                                    Toast.makeText(getApplicationContext(), "Signup successful. Verification email sent to "+ user.getEmail(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
