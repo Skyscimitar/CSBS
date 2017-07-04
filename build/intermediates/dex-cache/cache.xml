@@ -3,11 +3,20 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\theOne\.android\build-cache\470f536d3a211ce0af300e1e08ed83c36d5f620e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44a694d4095be84c2888764b1f7256b385c030ad">
+        <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9071c4c18211eccc7ede75353099bc1ce3a172bf\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="5fe940bf3bf24f6853fd52914be824a14c709652">
+        sha1="9a641d99c3001051be89cde3b974de90069d70ae">
         <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6340d745b6a13d254d2e5df0bd14f9080d300586\classes.dex" />
     </item>
     <item

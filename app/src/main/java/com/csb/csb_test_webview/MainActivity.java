@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference("csb");
 
         // Login process
         Button loginButton = (Button) findViewById(R.id.loginButton);
@@ -41,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
                 TextView pwdInput = (TextView) findViewById(R.id.inputPassword);
                 final String mail = mailInput.getText().toString() + getString(R.string.defaultMailAdress);
                 final String pwd = pwdInput.getText().toString();
+                Log.d("login","successed");
                 mAuth.signInWithEmailAndPassword(mail, pwd)
                     .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.d("login","success");
                             Log.d("Log Firebase", "signInWithEmail:onComplete:" + task.isSuccessful());
 
                             // If sign in fails, display a message to the user. If sign in succeeds
@@ -56,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
                                 textError.setVisibility(View.VISIBLE);
                             }else{
                                 textError.setVisibility(View.GONE);
-                                //Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                                //startActivity(intent);
+                                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                                startActivity(intent);
                             }
                         }
                     });
@@ -128,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                                     // If sign in fails, display a message to the user. If sign in succeeds
                                     // the auth state listener will be notified and logic to handle the
                                     // signed in user can be handled in the listener.
+                                    Log.d("Log Firebase", login + "," + pwd);
                                     if (!task.isSuccessful()) {
                                         Log.d("Log Firebase", "error");
                                         errorTextView.setVisibility(View.VISIBLE);

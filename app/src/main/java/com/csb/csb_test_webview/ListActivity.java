@@ -26,10 +26,6 @@ public class ListActivity extends FragmentActivity implements comunicate {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_activity);
 
-        Bundle bundle = getIntent().getExtras();
-        Log.i("token : ",bundle.getString("token"));
-        token = bundle.getString("token");
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
