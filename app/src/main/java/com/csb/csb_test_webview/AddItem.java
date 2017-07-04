@@ -7,10 +7,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+
+
 import com.csb.csb_test_webview.R;
 
 public class AddItem extends AppCompatActivity {
     String token;
+    String cityName;
+    //private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

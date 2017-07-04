@@ -10,7 +10,7 @@
     <!-- Item List -->
     <string name="title_activity_item_list">ItemList</string>
     <!-- Main Activity -->
-    <string name="hintConnexionMail">mail cs</string>
+    <string name="hintConnexionMail">prenom.nom</string>
     <string name="hintConnexionPassword">mot de passe</string>
     <string name="logCsbDescription">Logo CS&amp;B</string>
     <string name="inscriptionTextButton">Incription</string>
@@ -18,11 +18,11 @@
     <string name="labelTitreConnexion">Connecte toi pour accéder aux offres !</string>
     <string name="connexionTextButton">Connexion</string>
     <string name="connexionError">Login ou mot de passe incorrect</string>
-    <string name="errorSignUp">Erreur lors de l\'inscription, veuillez réessayer.</string>
+    <string name="errorSignUp">Erreur lors de l\'inscription. Vous devez utiliser prenom.nom SANS &defaultMailAdress; sur le formulaire.\nL\'adresse email peut aussi être déjà utilisée.</string>
     <!-- Sign up -->
     <string name="title_activity_sign_up">signUp</string>
     <string name="infoSignUp">Inscrivez-vous sur CSB&amp;S afin d\'échanger partout sur le campus.\nUtilisez votre adresse student.ecp.fr pour vous enregistrer.\nUn mail vous sera envoyé afin de confirmer votre adresse.</string>
-    <string name="labelSignUpMail">Identifiant mail</string>
+    <string name="labelSignUpMail">prenom.nom du mail</string>
     <string name="labelSignUpPwd">Mot de passe</string>
     <string name="buttonSignUp">Créer mon compte</string>
     <string name="infoPostSignUp">Un mail vous a été envoyé, cliquez sur le lien qu\'il contient pour valider votre compte.\nAdresse utilisée : </string>

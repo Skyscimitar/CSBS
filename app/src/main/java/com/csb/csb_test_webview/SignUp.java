@@ -21,7 +21,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TextView loginInput = (TextView) findViewById(R.id.inputSignUpLogin);
-                TextView pwdInput = (TextView) findViewById(R.id.inputSignUpPrenom);
+                TextView pwdInput = (TextView) findViewById(R.id.inputSignUpPassword);
                 TextView prenomInput = (TextView) findViewById(R.id.inputSignUpPrenom);
                 TextView nomInput = (TextView) findViewById(R.id.inputSignUpNom);
                 TextView telInput = (TextView) findViewById(R.id.inputSignUpTel);

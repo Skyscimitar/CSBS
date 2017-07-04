@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextView mailInput = (TextView) findViewById(R.id.inputLogin);
                 TextView pwdInput = (TextView) findViewById(R.id.inputPassword);
-                final String mail = mailInput.getText().toString() + "@student.ecp.fr";
+                final String mail = mailInput.getText().toString() + getString(R.string.defaultMailAdress);
                 final String pwd = pwdInput.getText().toString();
                 mAuth.signInWithEmailAndPassword(mail, pwd)
                     .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                     final String prenom = data.getStringExtra("prenom");
                     final String nom = data.getStringExtra("nom");
                     final String tel = data.getStringExtra("tel");
-                    Log.e("test", login + "," + pwd);
                     mAuth.createUserWithEmailAndPassword(login, pwd)
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                 @Override

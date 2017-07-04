@@ -27,7 +27,7 @@ import java.util.List;
 
 public class Datacollector extends AsyncTask<Void, Void, String> {
     private Exception exception;
-    private  String search;
+    private String search;
     private String type;
     private String response;
     private Activity activity;

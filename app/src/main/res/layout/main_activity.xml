@@ -113,7 +113,7 @@
                 android:background="@drawable/border_back"
                 android:ems="10"
                 android:hint="@string/hintConnexionMail"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:padding="10dp"
                 android:textCursorDrawable="@null"
                 app:layout_constraintHorizontal_bias="0.493"
