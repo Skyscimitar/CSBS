@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
                                 textError.setVisibility(View.VISIBLE);
                             }else{
                                 textError.setVisibility(View.GONE);
-                                //Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                                //startActivity(intent);
+                                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                                startActivity(intent);
                             }
                         }
                     });

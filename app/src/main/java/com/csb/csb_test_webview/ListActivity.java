@@ -19,16 +19,11 @@ import com.csb.csb_test_webview.R;
 
 
 public class ListActivity extends FragmentActivity implements comunicate {
-    public String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_activity);
-
-        Bundle bundle = getIntent().getExtras();
-        Log.i("token : ",bundle.getString("token"));
-        token = bundle.getString("token");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +82,6 @@ public class ListActivity extends FragmentActivity implements comunicate {
 
     public void createItem() {
         Intent intent = new Intent(this, AddItem.class);
-        intent.putExtra("token", token);
         startActivity(intent);
     }
 
