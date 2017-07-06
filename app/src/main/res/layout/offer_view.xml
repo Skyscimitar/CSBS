@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/offer_fragment">
+    android:id="@+id/offer_fragment"
+    android:background="@drawable/border_back">
 
     <TextView android:id="@+id/txtview"
         android:layout_width="fill_parent"

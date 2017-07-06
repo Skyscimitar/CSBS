@@ -32,6 +32,6 @@
     <string name="hintEmail">Sans &defaultMailAdress;</string>
 
     <!-- addItem -->
-    <string name="infoAddItem">Ce formulaire vous permet d\'ajouter à la vente un objet ou d\'emettre votre propre demande.</string>
+    <string name="infoAddItem">Ce formulaire vous permet de mettre en vente un objet ou d\'emettre votre propre proposition d\'achat.</string>
 
 </resources>

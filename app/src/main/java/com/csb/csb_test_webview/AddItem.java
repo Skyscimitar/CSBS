@@ -149,6 +149,20 @@ public class AddItem extends AppCompatActivity {
 
         Button chooseImg = (Button) findViewById(R.id.chooseImg);
 
+        offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                demand.setChecked(!demand.isChecked());
+            }
+        });
+
+        demand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                offer.setChecked(!offer.isChecked());
+            }
+        });
+
         chooseImg.setOnClickListener(new View.OnClickListener() {
            @Override
             public void onClick(View v) {
