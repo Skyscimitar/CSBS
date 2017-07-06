@@ -31,7 +31,12 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 //import com.google.android.gms.location.FusedLocationProviderClient;
 //import com.google.android.gms.location.LocationServices;
@@ -126,7 +131,7 @@ public class AddItem extends AppCompatActivity {
         final CheckBox demand = (CheckBox) findViewById(R.id.item_demand);
 
         Button chooseImg = (Button) findViewById(R.id.chooseImg);
-        final Button uploadImg = (Button) findViewById(R.id.uploadPictAddItem);
+        Button uploadImg = (Button) findViewById(R.id.uploadPictAddItem);
 
         chooseImg.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -138,20 +143,13 @@ public class AddItem extends AppCompatActivity {
            }
         });
 
-        chooseImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadFile();
-            }
-        });
-
         Button button = (Button) findViewById(R.id.submit);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
                 String priceVal = price.getText().toString();
-                String descriptionVal = price.getText().toString();
+                String descriptionVal = description.getText().toString();
                 if (priceVal.equals("") || descriptionVal.equals("") || !(offer.isChecked() || demand.isChecked()))
                     Toast.makeText(AddItem.this, "Merci de bien vouloir remplir tous les champs", Toast.LENGTH_SHORT).show();
                 else{
@@ -166,13 +164,26 @@ public class AddItem extends AppCompatActivity {
     });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
+            filePath = data.getData();
+            uploadFile();
+        }
+    }
+
     protected void writeArticle(String description, String price, Boolean offer ) {
-        Article article = new Article(description, price, "000", user.getDisplayName(),user.getDisplayName(), finalRef);
+        Article article = new Article(description, price, "000", user.getDisplayName(),user.getDisplayName(), urlPict);
+        Date d = new Date();
+        String idObj = "";
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssS");
+        idObj = format.format(d);
         if(offer){
-            mDatabase.child("offer").child(description).setValue(article);
-            Log.i("INFO","bite");
+            mDatabase.child("offer").child(idObj).setValue(article);
         }else{
-            mDatabase.child("demand").child(description).setValue(article);
+            mDatabase.child("demand").child(idObj).setValue(article);
         }
     }
     private void uploadFile() {

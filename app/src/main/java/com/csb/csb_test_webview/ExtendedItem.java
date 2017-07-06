@@ -34,12 +34,7 @@ public class ExtendedItem extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.extended_view, container, false);
 
-        StorageReference storageReference = article.getStorageReference();
-        ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
-        Glide.with(this /* context */)
-                .using(new FirebaseImageLoader())
-                .load(storageReference)
-                .into(imageView);
+
 
         TextView text = (TextView) view.findViewById(R.id.description);
         text.setText(article.toString() + " " + "vendu par " + article.getSellerName() + " " + article.getSellerSurname());

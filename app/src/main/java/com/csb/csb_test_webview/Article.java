@@ -13,9 +13,9 @@ public class Article {
     private String telephone;
     private String sellerName;
     private String sellerSurname;
-    private StorageReference storageReference;
+    private String storageReference;
 
-    public Article(String nom, String prix, String telephone, String sellerName, String sellerSurname, StorageReference storageReference){
+    public Article(String nom, String prix, String telephone, String sellerName, String sellerSurname, String storageReference){
         this.nom = nom;
         this.prix = prix;
         this.telephone = telephone;
@@ -44,7 +44,7 @@ public class Article {
         return sellerSurname;
     }
 
-    public StorageReference getStorageReference() { return storageReference; }
+    public String getStorageReference() { return storageReference; }
 
     @Override
     public String toString(){
