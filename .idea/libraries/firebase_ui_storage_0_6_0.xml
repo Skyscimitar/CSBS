@@ -1,8 +1,13 @@
 <component name="libraryTable">
   <library name="firebase-ui-storage-0.6.0">
     <CLASSES>
+<<<<<<< Updated upstream
       <root url="jar://$USER_HOME$/.android/build-cache/dcdf9c14eede76e741fa8aaa1860823fcd303dcb/output/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.android/build-cache/dcdf9c14eede76e741fa8aaa1860823fcd303dcb/output/res" />
+=======
+      <root url="jar://$USER_HOME$/.android/build-cache/37a985686efd6deeccf3aad4c7fddd203e038c09/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/37a985686efd6deeccf3aad4c7fddd203e038c09/output/res" />
+>>>>>>> Stashed changes
     </CLASSES>
     <JAVADOC />
     <SOURCES>
