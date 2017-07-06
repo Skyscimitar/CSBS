@@ -116,8 +116,7 @@ public class AddItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (filePath != null) {
-                    StorageReference childRef = storageRef.child("image.jpg");
-
+                    StorageReference childRef = storageRef.child( /* TODO Convention */"image.jpg");
                     UploadTask uploadTask = childRef.putFile(filePath);
                 } else {
                     Toast.makeText(AddItem.this, "Sélectionnez une image", Toast.LENGTH_SHORT).show();
@@ -128,15 +127,23 @@ public class AddItem extends AppCompatActivity {
                     Toast.makeText(AddItem.this, "Merci de bien vouloir remplir tous les champs", Toast.LENGTH_SHORT).show();
                 else{
                     if (offer.isChecked()) {
-                        DataSender ds = new DataSender(descriptionVal, priceVal, "typeItem=1", token);
+                        DataSender ds = new DataSender(descriptionVal, priceVal, "typeItem=1", token, storageRef /* Il faut peut être mettre childRef, à tester */);
                         ds.execute();
                     } else if (demand.isChecked()) {
-                        DataSender ds = new DataSender(descriptionVal, priceVal, "typeItem=2", token);
+                        DataSender ds = new DataSender(descriptionVal, priceVal, "typeItem=2", token, storageRef /* Il faut peut être mettre childRef, à tester */);
                         ds.execute();
                     }
                 }
 
         }
     });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null &&data.getData() != null) {
+            filePath = data.getData();
+        }
     }
 }
