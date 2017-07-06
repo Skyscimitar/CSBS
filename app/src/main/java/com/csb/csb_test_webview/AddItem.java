@@ -35,6 +35,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.csb.csb_test_webview.R.styleable.View;
+
 public class AddItem extends AppCompatActivity {
     String token;
     double longitude;
@@ -44,6 +46,7 @@ public class AddItem extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     final StorageReference storageRef = storage.getReferenceFromUrl("gs://csbandroid-2ef3f.appspot.com");
     LocationManager locationManager;
+    private StorageReference finalRef;
 
 
     //private FusedLocationProviderClient mFusedLocationClient;
@@ -128,6 +131,7 @@ public class AddItem extends AppCompatActivity {
             public void onClick(View v) {
                 if (filePath != null) {
                     StorageReference childRef = storageRef.child( /* TODO Convention */"image.jpg");
+                    finalRef = childRef;
                     UploadTask uploadTask = childRef.putFile(filePath);
                 } else {
                     Toast.makeText(AddItem.this, "Sélectionnez une image", Toast.LENGTH_SHORT).show();
@@ -138,11 +142,9 @@ public class AddItem extends AppCompatActivity {
                     Toast.makeText(AddItem.this, "Merci de bien vouloir remplir tous les champs", Toast.LENGTH_SHORT).show();
                 else{
                     if (offer.isChecked()) {
-                        DataSender ds = new DataSender(descriptionVal, priceVal, "typeItem=1", token, storageRef /* Il faut peut être mettre childRef, à tester */);
-                        ds.execute();
+                        writeArticle(descriptionVal, priceVal, true);
                     } else if (demand.isChecked()) {
-                        DataSender ds = new DataSender(descriptionVal, priceVal, "typeItem=2", token, storageRef /* Il faut peut être mettre childRef, à tester */);
-                        ds.execute();
+                        writeArticle(descriptionVal, priceVal, false);
                     }
                 }
 
@@ -151,7 +153,7 @@ public class AddItem extends AppCompatActivity {
     }
 
     protected void writeArticle(String description, String price, Boolean offer ) {
-        Article article = new Article(description, price, "000", user.getDisplayName(),user.getDisplayName());
+        Article article = new Article(description, price, "000", user.getDisplayName(),user.getDisplayName(), finalRef);
         if(offer){
             mDatabase.child("offer").child(description).setValue(article);
             Log.i("INFO","bite");

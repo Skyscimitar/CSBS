@@ -28,8 +28,8 @@ public class Demande extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         EditText medit = (EditText) getActivity().findViewById(R.id.editText2);
-        final Datacollector dc = new Datacollector("&typeItem=2", getActivity(), medit.getText().toString());
-        dc.execute();
+        //final Datacollector dc = new Datacollector("&typeItem=2", getActivity(), medit.getText().toString());
+        //dc.execute();
 
     }
 }
