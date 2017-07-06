@@ -17,7 +17,7 @@ public class Article {
     private Double longitude;
     private Double latitude;
 
-    public Article(String nom, String prix, String telephone, String sellerName, String sellerSurname, String storageReference){
+    public Article(String nom, String prix, String telephone, String sellerName, String sellerSurname, String storageReference, Double longitude, Double latitude){
         this.nom = nom;
         this.prix = prix;
         this.telephone = telephone;
@@ -52,6 +52,14 @@ public class Article {
     }
 
     public String getStorageReference() { return storageReference; }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
 
     @Override
     public String toString(){

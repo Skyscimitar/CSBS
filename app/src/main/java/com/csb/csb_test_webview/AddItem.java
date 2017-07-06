@@ -27,6 +27,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -68,6 +71,7 @@ public class AddItem extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
     private FirebaseUser user;
+    private User userInfos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,17 @@ public class AddItem extends AppCompatActivity {
         longitude = 0;
         latitude = 0;
         urlPict = "";
+
+        Log.e("user",user.getUid());
+        mDatabase.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                userInfos = snapshot.getValue(User.class);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
         for(String name : names)
             providers.add(locationManager.getProvider(name));
@@ -176,7 +191,7 @@ public class AddItem extends AppCompatActivity {
     }
 
     protected void writeArticle(String description, String price, Boolean offer ) {
-        Article article = new Article(description, price, "0628927787", user.getDisplayName(),user.getDisplayName(), urlPict);
+        Article article = new Article(description, price, userInfos.tel, userInfos.prenom,userInfos.nom, urlPict, longitude, latitude);
         Date d = new Date();
         String idObj = "";
 
