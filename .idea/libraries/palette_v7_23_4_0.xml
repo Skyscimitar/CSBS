@@ -1,21 +1,12 @@
 <component name="libraryTable">
   <library name="palette-v7-23.4.0">
     <CLASSES>
-<<<<<<< Updated upstream
-      <root url="file://$USER_HOME$/.android/build-cache/63dbfed7a6767a27207c8e017696940c2bf80ebf/output/res" />
-      <root url="jar://$USER_HOME$/.android/build-cache/63dbfed7a6767a27207c8e017696940c2bf80ebf/output/jars/classes.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/AppData/Local/Android/Sdk/extras/android/m2repository/com/android/support/palette-v7/23.4.0/palette-v7-23.4.0-sources.jar!/" />
-=======
       <root url="jar://$USER_HOME$/.android/build-cache/8eef32ea8918e8b7b410e9aea87888d630b46c63/output/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.android/build-cache/8eef32ea8918e8b7b410e9aea87888d630b46c63/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/palette-v7/23.4.0/palette-v7-23.4.0-sources.jar!/" />
->>>>>>> Stashed changes
     </SOURCES>
   </library>
 </component>
