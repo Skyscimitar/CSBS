@@ -53,6 +53,7 @@ public class Offre extends ListFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final Activity  activity = getActivity();
                 Article article = dataSnapshot.getValue(Article.class);
+                Log.i("bite", "bite");
                 article_data.add(article);
                 List<Article> articles = article_data;
                 Article article_dat[] = new Article[articles.size()];
