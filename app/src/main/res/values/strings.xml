@@ -31,5 +31,7 @@
     <string name="labelSignUpTel">Numéro</string>
     <string name="hintEmail">Sans &defaultMailAdress;</string>
 
+    <!-- addItem -->
+    <string name="infoAddItem">Ce formulaire vous permet d\'ajouter à la vente un objet ou d\'emettre votre propre demande.</string>
 
 </resources>

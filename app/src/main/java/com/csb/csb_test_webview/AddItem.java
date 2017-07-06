@@ -1,6 +1,8 @@
 package com.csb.csb_test_webview;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -10,6 +12,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +23,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -41,6 +48,7 @@ public class AddItem extends AppCompatActivity {
     String token;
     double longitude;
     double latitude;
+    String urlPict = "";
     Uri filePath;
     int PICK_IMAGE_REQUEST = 111;
     FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -59,11 +67,15 @@ public class AddItem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+        finalRef = storage.getReference();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference("csb");
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         ArrayList<LocationProvider> providers = new ArrayList<LocationProvider>();
         ArrayList<String> names = new ArrayList<String>(locationManager.getProviders(true));
         longitude = 0;
         latitude = 0;
+        urlPict = "";
 
         for(String name : names)
             providers.add(locationManager.getProvider(name));
@@ -114,6 +126,7 @@ public class AddItem extends AppCompatActivity {
         final CheckBox demand = (CheckBox) findViewById(R.id.item_demand);
 
         Button chooseImg = (Button) findViewById(R.id.chooseImg);
+        final Button uploadImg = (Button) findViewById(R.id.uploadPictAddItem);
 
         chooseImg.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -125,20 +138,21 @@ public class AddItem extends AppCompatActivity {
            }
         });
 
+        chooseImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadFile();
+            }
+        });
+
         Button button = (Button) findViewById(R.id.submit);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (filePath != null) {
-                    StorageReference childRef = storageRef.child( /* TODO Convention */"image.jpg");
-                    finalRef = childRef;
-                    UploadTask uploadTask = childRef.putFile(filePath);
-                } else {
-                    Toast.makeText(AddItem.this, "Sélectionnez une image", Toast.LENGTH_SHORT).show();
-                }
+
                 String priceVal = price.getText().toString();
                 String descriptionVal = price.getText().toString();
-                if (priceVal.equals("") || descriptionVal.equals(""))
+                if (priceVal.equals("") || descriptionVal.equals("") || !(offer.isChecked() || demand.isChecked()))
                     Toast.makeText(AddItem.this, "Merci de bien vouloir remplir tous les champs", Toast.LENGTH_SHORT).show();
                 else{
                     if (offer.isChecked()) {
@@ -159,6 +173,56 @@ public class AddItem extends AppCompatActivity {
             Log.i("INFO","bite");
         }else{
             mDatabase.child("demand").child(description).setValue(article);
+        }
+    }
+    private void uploadFile() {
+        //if there is a file to upload
+        if (filePath != null) {
+            //displaying a progress dialog while upload is going on
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading");
+            progressDialog.show();
+
+            StorageReference riversRef = storageRef.child("images/pic.jpg");
+            riversRef.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //if the upload is successfull
+                            //hiding the progress dialog
+                            progressDialog.dismiss();
+
+                            urlPict = taskSnapshot.getDownloadUrl().toString();
+
+                            //and displaying a success toast
+                            Toast.makeText(getApplicationContext(), "File Uploaded , url is : "+urlPict, Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            //if the upload is not successfull
+                            //hiding the progress dialog
+                            progressDialog.dismiss();
+
+                            //and displaying error message
+                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            //calculating progress percentage
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+
+                            //displaying percentage in progress dialog
+                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                        }
+                    });
+        }
+        //if there is not any file
+        else {
+            //you can display an error toast
         }
     }
 }
