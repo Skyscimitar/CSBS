@@ -177,16 +177,16 @@ public class AddItem extends AppCompatActivity {
     }
 
     protected void writeArticle(String description, String price, Boolean offer ) {
-        Article article = new Article(description, price, "000", user.getDisplayName(),user.getDisplayName(), urlPict);
+        Article article = new Article(description, price, "0628927787", user.getDisplayName(),user.getDisplayName(), urlPict);
         Date d = new Date();
         String idObj = "";
 
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssS");
         idObj = format.format(d);
         if(offer){
-            mDatabase.child("csb").child("offer").child(idObj).setValue(article);
+            mDatabase.child("offer").child(idObj).setValue(article);
         }else{
-            mDatabase.child("offer").child("demand").child(idObj).setValue(article);
+            mDatabase.child("demand").child(idObj).setValue(article);
         }
     }
     private void uploadFile() {
