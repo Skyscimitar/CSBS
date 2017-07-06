@@ -47,7 +47,7 @@ public class Offre extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         EditText medit = (EditText) getActivity().findViewById(R.id.editText2);
-        DatabaseReference ref = mDatabase.child("offer");
+        DatabaseReference ref = mDatabase.child("csb").child("offer");
         ref.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -184,9 +184,9 @@ public class AddItem extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssS");
         idObj = format.format(d);
         if(offer){
-            mDatabase.child("offer").child(idObj).setValue(article);
+            mDatabase.child("csb").child("offer").child(idObj).setValue(article);
         }else{
-            mDatabase.child("demand").child(idObj).setValue(article);
+            mDatabase.child("offer").child("demand").child(idObj).setValue(article);
         }
     }
     private void uploadFile() {
