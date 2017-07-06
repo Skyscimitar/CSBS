@@ -21,6 +21,8 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.StorageReference;
 
+import static com.firebase.ui.storage.R.styleable.View;
+
 /**
  * Created by Danny on 06/06/2017.
  */
@@ -38,6 +40,11 @@ public class ExtendedItem extends Fragment {
 
         TextView text = (TextView) view.findViewById(R.id.description);
         text.setText(article.toString() + " " + "vendu par " + article.getSellerName() + " " + article.getSellerSurname());
+        ImageView img = (ImageView) view.findViewById(R.id.imgView);
+        //Glide.with(this)
+        //        .using(new FirebaseImageLoader())
+        //        .load(article.getStorageReference())
+         //       .into(img);
         Button button = (Button)view.findViewById(R.id.call);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
