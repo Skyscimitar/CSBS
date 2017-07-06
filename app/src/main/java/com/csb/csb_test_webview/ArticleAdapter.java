@@ -41,7 +41,8 @@ public class ArticleAdapter extends ArrayAdapter<Article>{
             holder = (ArticleHolder) row.getTag();
         }
         Article article = data[position];
-        holder.txtview.setText(article.toString());
+        if(article != null)
+            holder.txtview.setText(article.toString());
 
         return row;
     }

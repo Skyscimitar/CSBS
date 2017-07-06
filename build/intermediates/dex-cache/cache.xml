@@ -3,66 +3,21 @@
 
     <item
         is-multidex="true"
-<<<<<<< Updated upstream
-        jar="C:\Users\theOne\.android\build-cache\63dbfed7a6767a27207c8e017696940c2bf80ebf\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="51518e8e8f97c314a243d9def0ded91d385b6a1e">
-        <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9e5405ea3753b5f189edfd11863911cd6716a167\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\theOne\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
-        <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10\glide-3.7.0_2ac0e9b654a2ec48d00792638672fc36cf871197\classes.dex" />
-=======
-        jar="/Users/Danny/AndroidStudioProjects/CSBS/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/Danny/AndroidStudioProjects/CSBS/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_66c16eb98e62c3f012c37ab48315109fe20a892b/classes.dex" />
->>>>>>> Stashed changes
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Danny/AndroidStudioProjects/CSBS/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="7ceb22854048547c17156f28ce11e6e4186a14c0">
-        <dex dex="/Users/Danny/AndroidStudioProjects/CSBS/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c9ffe59991de64339ce0ee32d99a19b80475cceb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="e3c73fe59fe1fe52244a0c8dfb03c267cbaeebf4">
+        sha1="6d300a62baff41ddd27c2b55422fa0b9dd278657">
         <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6340d745b6a13d254d2e5df0bd14f9080d300586\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\theOne\.android\build-cache\470f536d3a211ce0af300e1e08ed83c36d5f620e\output\jars\classes.jar"
+        jar="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="44a694d4095be84c2888764b1f7256b385c030ad">
-        <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9071c4c18211eccc7ede75353099bc1ce3a172bf\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\theOne\.android\build-cache\dcdf9c14eede76e741fa8aaa1860823fcd303dcb\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="3c433e48557e476290f45fb6cb568d1a103c9978">
-        <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_348f0f47db341d1e8ddb04f4475bdc9963f21d0c\classes.dex" />
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_3d8c8d24edcd9c07792d9e580f09bc3a78020bd2\classes.dex" />
     </item>
 
 </items>
