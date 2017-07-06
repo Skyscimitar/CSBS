@@ -1,8 +1,13 @@
 <component name="libraryTable">
   <library name="support-media-compat-25.3.1">
     <CLASSES>
+<<<<<<< Updated upstream
       <root url="jar://$USER_HOME$/.android/build-cache/d1f12e9cb2d6998e951fd6eff4a7774ac8835b48/output/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.android/build-cache/d1f12e9cb2d6998e951fd6eff4a7774ac8835b48/output/res" />
+=======
+      <root url="file://$USER_HOME$/.android/build-cache/8cbeeec70f949712fd845b697915d7d82b78ba3e/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/8cbeeec70f949712fd845b697915d7d82b78ba3e/output/jars/classes.jar!/" />
+>>>>>>> Stashed changes
     </CLASSES>
     <JAVADOC />
     <SOURCES>
