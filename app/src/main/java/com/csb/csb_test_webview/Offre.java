@@ -47,14 +47,16 @@ public class Offre extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         EditText medit = (EditText) getActivity().findViewById(R.id.editText2);
-        DatabaseReference ref = mDatabase.child("csb").child("offer");
+        DatabaseReference ref = mDatabase.child("offer");
         ref.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                final Activity  activity = getActivity();
-                Article article = dataSnapshot.getValue(Article.class);
-                Log.i("bite", "bite");
-                article_data.add(article);
+                final Activity activity = getActivity();
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Article article = postSnapshot.getValue(Article.class);
+                    article_data.add(article);
+                }
+                Log.i("test", article_data.toString());
                 List<Article> articles = article_data;
                 Article article_dat[] = new Article[articles.size()];
                 article_dat = articles.toArray(article_dat);
