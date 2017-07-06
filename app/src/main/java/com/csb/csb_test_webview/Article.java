@@ -23,6 +23,9 @@ public class Article {
         this.sellerSurname = sellerSurname;
         this.storageReference = storageReference;
     }
+    public Article(){
+
+    }
 
     public String getNom() {
         return nom;
