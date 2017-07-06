@@ -14,6 +14,8 @@ public class Article {
     private String sellerName;
     private String sellerSurname;
     private String storageReference;
+    private Double longitude;
+    private Double latitude;
 
     public Article(String nom, String prix, String telephone, String sellerName, String sellerSurname, String storageReference){
         this.nom = nom;
@@ -22,6 +24,8 @@ public class Article {
         this.sellerName = sellerName;
         this.sellerSurname = sellerSurname;
         this.storageReference = storageReference;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
     public Article(){
 

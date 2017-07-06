@@ -133,7 +133,6 @@ public class AddItem extends AppCompatActivity {
         final CheckBox demand = (CheckBox) findViewById(R.id.item_demand);
 
         Button chooseImg = (Button) findViewById(R.id.chooseImg);
-        Button uploadImg = (Button) findViewById(R.id.uploadPictAddItem);
 
         chooseImg.setOnClickListener(new View.OnClickListener() {
            @Override

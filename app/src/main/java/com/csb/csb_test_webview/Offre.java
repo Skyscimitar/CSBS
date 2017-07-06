@@ -52,6 +52,7 @@ public class Offre extends ListFragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final Activity activity = getActivity();
+                article_data = new ArrayList<Article>();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Article article = postSnapshot.getValue(Article.class);
                     article_data.add(article);
