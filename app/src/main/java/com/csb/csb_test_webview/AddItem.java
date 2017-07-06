@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,6 +72,7 @@ public class AddItem extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setStatusBarColor(ContextCompat.getColor(this, android.R.color.black));
         setContentView(R.layout.activity_add_item);
         finalRef = storage.getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -158,6 +160,7 @@ public class AddItem extends AppCompatActivity {
                     } else if (demand.isChecked()) {
                         writeArticle(descriptionVal, priceVal, false);
                     }
+                    finish();
                 }
 
         }

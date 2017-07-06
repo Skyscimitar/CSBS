@@ -32,7 +32,7 @@ import android.widget.ListView;
 
 public class Offre extends ListFragment {
     comunicate cm;
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("csb");
     private ArrayList<Article> article_data = new ArrayList<>();
 
     @Override
@@ -73,7 +73,7 @@ public class Offre extends ListFragment {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
+                Log.e("DB offer",error.toString());
             }
         });
 
