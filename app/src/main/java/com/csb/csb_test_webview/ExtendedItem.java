@@ -13,10 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.csb.csb_test_webview.R;
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * Created by Danny on 06/06/2017.
@@ -25,10 +28,19 @@ import com.csb.csb_test_webview.R;
 public class ExtendedItem extends Fragment {
     Integer count =1;
     Article article;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.extended_view, container, false);
+
+        StorageReference storageReference = article.getStorageReference();
+        ImageView imageView = (ImageView)view.findViewById(R.id.imageView);
+        Glide.with(this /* context */)
+                .using(new FirebaseImageLoader())
+                .load(storageReference)
+                .into(imageView);
+
         TextView text = (TextView) view.findViewById(R.id.description);
         text.setText(article.toString() + " " + "vendu par " + article.getSellerName() + " " + article.getSellerSurname());
         Button button = (Button)view.findViewById(R.id.call);

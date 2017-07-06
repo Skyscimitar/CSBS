@@ -1,5 +1,7 @@
 package com.csb.csb_test_webview;
 
+import com.google.firebase.storage.StorageReference;
+
 /**
  * Created by Danny on 06/06/2017.
  */
@@ -10,13 +12,15 @@ public class Article {
     private String telephone;
     private String sellerName;
     private String sellerSurname;
+    private StorageReference storageReference;
 
-    public Article(String nom, String prix, String telephone, String sellerName, String sellerSurname){
+    public Article(String nom, String prix, String telephone, String sellerName, String sellerSurname, StorageReference storageReference){
         this.nom = nom;
         this.prix = prix;
         this.telephone = telephone;
         this.sellerName = sellerName;
         this.sellerSurname = sellerSurname;
+        this.storageReference = storageReference;
     }
 
     public String getNom() {
@@ -38,6 +42,8 @@ public class Article {
     public String getSellerSurname() {
         return sellerSurname;
     }
+
+    public StorageReference getStorageReference() { return storageReference; }
 
     @Override
     public String toString(){
