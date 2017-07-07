@@ -39,13 +39,18 @@ public class ExtendedItem extends Fragment {
 
 
 
-        TextView text = (TextView) view.findViewById(R.id.description);
-        text.setText(article.toString() + " " + "vendu par " + article.getSellerName() + " " + article.getSellerSurname());
+        TextView descriptionExtendedView = (TextView) view.findViewById(R.id.descriptionExtendedView);
+        TextView prixExtendedView = (TextView) view.findViewById(R.id.prixExtendedView);
+        TextView distanceExtendedView = (TextView) view.findViewById(R.id.distanceExtendedView);
+        TextView nomVendeurExtendedView = (TextView) view.findViewById(R.id.nomVendeurExtendedView);
+        descriptionExtendedView.setText(article.getNom());
+        nomVendeurExtendedView.setText("Vendu par " + article.getSellerName() + " " + article.getSellerSurname());
+        distanceExtendedView.setText(article.getLatitude().toString() +"m");
+        prixExtendedView.setText("prix : " + article.getPrix().toString() + "€");
         ImageView img = (ImageView) view.findViewById(R.id.imgView);
         Glide.with(this)
                 .load(article.getStorageReference())
                 .into(img);
-        Log.e("test",article.getStorageReference());
         Button button = (Button)view.findViewById(R.id.call);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
