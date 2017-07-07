@@ -13,6 +13,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.csb.csb_test_webview.R;
+import com.google.firebase.database.Logger;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +26,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -48,39 +52,40 @@ public class Offre extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         EditText medit = (EditText) getActivity().findViewById(R.id.editText2);
         DatabaseReference ref = mDatabase.child("offer");
-        ref.addValueEventListener(new ValueEventListener(){
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                final Activity activity = getActivity();
-                article_data = new ArrayList<Article>();
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Article article = postSnapshot.getValue(Article.class);
-                    article_data.add(article);
+        String queryText = medit.getText().toString();
+        Query query = ref.orderByChild("nom")
+                .startAt(queryText)
+                .endAt(queryText+"\uf8ff");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(DataSnapshot dataSnapshot) {
+                     final Activity activity = getActivity();
+                     article_data = new ArrayList<Article>();
+                     for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                         Article article = postSnapshot.getValue(Article.class);
+                         article_data.add(article);
+                     }
+                     List<Article> articles = article_data;
+                     Article article_dat[] = new Article[articles.size()];
+                     article_dat = articles.toArray(article_dat);
+                     final Article article_data[] = article_dat;
+                     ArticleAdapter offerAdapter = new ArticleAdapter(activity, R.layout.offer_view,article_data);
+                     final ListView listView = (ListView) activity.findViewById(android.R.id.list);
+                     listView.setAdapter(offerAdapter);
+                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                         @Override
+                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                             comunicate cm;
+                             cm = (comunicate) activity;
+                             cm.sendData(article_data[position]);
+                         }
+                     });
+                 }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
                 }
-                List<Article> articles = article_data;
-                Article article_dat[] = new Article[articles.size()];
-                article_dat = articles.toArray(article_dat);
-                final Article article_data[] = article_dat;
-                ArticleAdapter offerAdapter = new ArticleAdapter(activity, R.layout.offer_view,article_data);
-                final ListView listView = (ListView) activity.findViewById(android.R.id.list);
-                listView.setAdapter(offerAdapter);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        comunicate cm;
-                        cm = (comunicate) activity;
-                        cm.sendData(article_data[position]);
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.e("DB offer",error.toString());
-            }
         });
-
-
 
     }
 
