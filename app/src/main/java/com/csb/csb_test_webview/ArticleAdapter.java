@@ -18,12 +18,14 @@ public class ArticleAdapter extends ArrayAdapter<Article>{
     Context context;
     int layoutResourceId;
     Article data[] = null;
+    Geoloc geoloc;
 
     public ArticleAdapter(Context context, int layoutResourceId, Article[] data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        geoloc = Geoloc.getInstance(context);
     }
 
     @Override
@@ -50,7 +52,12 @@ public class ArticleAdapter extends ArrayAdapter<Article>{
             holder.prixOfferView.setText(article.getPrix().toString() + "€");
             holder.nomVendeurOfferView.setText("De " + article.getSellerName() + " " + article.getSellerSurname());
             Double distance = (double)Math.round(article.getLatitude() * 1000d) / 1000d;
-            holder.distanceOfferView.setText(distance.toString() +"m");
+            holder.distanceOfferView.setText(
+                    geoloc.getDistanceUser(
+                            Double.valueOf(article.getLatitude()),
+                            Double.valueOf(article.getLongitude())
+                    )
+            );
         }
 
         return row;

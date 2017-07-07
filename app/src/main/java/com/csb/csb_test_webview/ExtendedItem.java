@@ -35,13 +35,14 @@ import static com.firebase.ui.storage.R.styleable.View;
 public class ExtendedItem extends Fragment {
     Integer count =1;
     Article article;
+    Geoloc geoloc;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.extended_view, container, false);
 
-
+        geoloc = Geoloc.getInstance(getActivity());
 
         TextView descriptionExtendedView = (TextView) view.findViewById(R.id.descriptionExtendedView);
         TextView prixExtendedView = (TextView) view.findViewById(R.id.prixExtendedView);
@@ -49,10 +50,14 @@ public class ExtendedItem extends Fragment {
         TextView nomVendeurExtendedView = (TextView) view.findViewById(R.id.nomVendeurExtendedView);
         descriptionExtendedView.setText(article.getNom());
         nomVendeurExtendedView.setText("De " + article.getSellerName() + " " + article.getSellerSurname());
-        Double distance = (double)Math.round(article.getLatitude() * 1000d) / 1000d;
-        distanceExtendedView.setText(distance.toString() +"m");
+         distanceExtendedView.setText(geoloc.getDistanceUser(
+                Double.valueOf(article.getLatitude()),
+                Double.valueOf(article.getLongitude())
+        ));
         prixExtendedView.setText(article.getPrix().toString() + "€");
         ImageView img = (ImageView) view.findViewById(R.id.imgView);
+
+
 
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress);
         progressBar.setVisibility(android.view.View.VISIBLE);

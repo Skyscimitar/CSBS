@@ -72,6 +72,7 @@ public class AddItem extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseUser user;
     private User userInfos;
+    Geoloc geoloc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +82,7 @@ public class AddItem extends AppCompatActivity {
         finalRef = storage.getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference("csb");
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        ArrayList<LocationProvider> providers = new ArrayList<LocationProvider>();
-        ArrayList<String> names = new ArrayList<String>(locationManager.getProviders(true));
+        geoloc = Geoloc.getInstance(this);
         longitude = 0;
         latitude = 0;
         urlPict = "";
@@ -99,51 +98,6 @@ public class AddItem extends AppCompatActivity {
             }
         });
 
-        for(String name : names)
-            providers.add(locationManager.getProvider(name));
-
-        Criteria critere = new Criteria();
-
-        // Pour indiquer la précision voulue
-        // On peut mettre ACCURACY_FINE pour une haute précision ou ACCURACY_COARSE pour une moins bonne précision
-        critere.setAccuracy(Criteria.ACCURACY_FINE);
-        // Est-ce que le fournisseur doit être capable de donner une altitude ?
-        critere.setAltitudeRequired(true);
-        // Est-ce que le fournisseur doit être capable de donner une direction ?
-        critere.setBearingRequired(true);
-        // Est-ce que le fournisseur peut être payant ?
-        critere.setCostAllowed(false);
-        // Pour indiquer la consommation d'énergie demandée
-        // Criteria.POWER_HIGH pour une haute consommation, Criteria.POWER_MEDIUM pour une consommation moyenne et Criteria.POWER_LOW pour une basse consommation
-        critere.setPowerRequirement(Criteria.POWER_HIGH);
-        // Est-ce que le fournisseur doit être capable de donner une vitesse ?
-        critere.setSpeedRequired(true);
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.e("Permission","ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION disable");
-        }else {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 150, new LocationListener() {
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
-                }
-                @Override
-                public void onProviderEnabled(String provider) {
-                }
-                @Override
-                public void onProviderDisabled(String provider) {
-                }
-                @Override
-                public void onLocationChanged(Location location) {
-                    Log.d("GPS", "Latitude " + location.getLatitude() + " et longitude " + location.getLongitude());
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-                }
-            });
-        }
-        if(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null) {
-            latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
-            longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
-        }
         final EditText description = (EditText) findViewById(R.id.item_description);
         final EditText price = (EditText) findViewById(R.id.item_price);
         final CheckBox offer = (CheckBox) findViewById(R.id.item_offer);
@@ -207,7 +161,7 @@ public class AddItem extends AppCompatActivity {
     }
 
     protected void writeArticle(String description, String price, Boolean offer ) {
-        Article article = new Article(description, price, userInfos.tel, userInfos.prenom,userInfos.nom, urlPict, longitude, latitude);
+        Article article = new Article(description, price, userInfos.tel, userInfos.prenom,userInfos.nom, urlPict, geoloc.getLongitude(), geoloc.getLatitude());
         Date d = new Date();
         String idObj = "";
 
@@ -269,6 +223,7 @@ public class AddItem extends AppCompatActivity {
         }
         //if there is not any file
         else {
+            Log.e("Pict upload issue","Error while uploading file");
             //you can display an error toast
         }
     }
