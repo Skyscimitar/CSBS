@@ -47,9 +47,10 @@ public class ArticleAdapter extends ArrayAdapter<Article>{
         Article article = data[position];
         if(article != null) {
             holder.descriptionOfferView.setText(article.getNom());
-            holder.prixOfferView.setText("prix : " + article.getPrix().toString() + "€");
-            holder.nomVendeurOfferView.setText("Vendu par " + article.getSellerName() + " " + article.getSellerSurname());
-            holder.distanceOfferView.setText("distance : " + article.getLatitude().toString() +"m");
+            holder.prixOfferView.setText(article.getPrix().toString() + "€");
+            holder.nomVendeurOfferView.setText("De " + article.getSellerName() + " " + article.getSellerSurname());
+            Double distance = (double)Math.round(article.getLatitude() * 1000d) / 1000d;
+            holder.distanceOfferView.setText(distance.toString() +"m");
         }
 
         return row;

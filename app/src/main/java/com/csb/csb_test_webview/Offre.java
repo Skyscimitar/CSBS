@@ -65,21 +65,23 @@ public class Offre extends ListFragment {
                          Article article = postSnapshot.getValue(Article.class);
                          article_data.add(article);
                      }
-                     List<Article> articles = article_data;
-                     Article article_dat[] = new Article[articles.size()];
-                     article_dat = articles.toArray(article_dat);
-                     final Article article_data[] = article_dat;
-                     ArticleAdapter offerAdapter = new ArticleAdapter(activity, R.layout.offer_view,article_data);
-                     final ListView listView = (ListView) activity.findViewById(android.R.id.list);
-                     listView.setAdapter(offerAdapter);
-                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                         @Override
-                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                             comunicate cm;
-                             cm = (comunicate) activity;
-                             cm.sendData(article_data[position]);
-                         }
-                     });
+                     if(article_data.size()!=0) {
+                         List<Article> articles = article_data;
+                         Article article_dat[] = new Article[articles.size()];
+                         article_dat = articles.toArray(article_dat);
+                         final Article article_data[] = article_dat;
+                         ArticleAdapter offerAdapter = new ArticleAdapter(activity, R.layout.offer_view, article_data);
+                         final ListView listView = (ListView) activity.findViewById(android.R.id.list);
+                         listView.setAdapter(offerAdapter);
+                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                             @Override
+                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                 comunicate cm;
+                                 cm = (comunicate) activity;
+                                 cm.sendData(article_data[position]);
+                             }
+                         });
+                     }
                  }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {

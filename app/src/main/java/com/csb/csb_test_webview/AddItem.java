@@ -122,7 +122,7 @@ public class AddItem extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Log.e("Permission","ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION disable");
         }else {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 150, new LocationListener() {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 150, new LocationListener() {
                 @Override
                 public void onStatusChanged(String provider, int status, Bundle extras) {
                 }
@@ -227,7 +227,10 @@ public class AddItem extends AppCompatActivity {
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
-            StorageReference riversRef = storageRef.child("images/pic.jpg");
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssS");
+            String idObj = format.format(new Date());
+
+            StorageReference riversRef = storageRef.child("images/"+idObj+".jpg");
             riversRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override

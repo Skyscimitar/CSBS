@@ -15,10 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.StorageReference;
 
@@ -44,12 +48,29 @@ public class ExtendedItem extends Fragment {
         TextView distanceExtendedView = (TextView) view.findViewById(R.id.distanceExtendedView);
         TextView nomVendeurExtendedView = (TextView) view.findViewById(R.id.nomVendeurExtendedView);
         descriptionExtendedView.setText(article.getNom());
-        nomVendeurExtendedView.setText("Vendu par " + article.getSellerName() + " " + article.getSellerSurname());
-        distanceExtendedView.setText(article.getLatitude().toString() +"m");
-        prixExtendedView.setText("prix : " + article.getPrix().toString() + "€");
+        nomVendeurExtendedView.setText("De " + article.getSellerName() + " " + article.getSellerSurname());
+        Double distance = (double)Math.round(article.getLatitude() * 1000d) / 1000d;
+        distanceExtendedView.setText(distance.toString() +"m");
+        prixExtendedView.setText(article.getPrix().toString() + "€");
         ImageView img = (ImageView) view.findViewById(R.id.imgView);
+
+        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress);
+        progressBar.setVisibility(android.view.View.VISIBLE);
         Glide.with(this)
                 .load(article.getStorageReference())
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(android.view.View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        progressBar.setVisibility(android.view.View.GONE);
+                        return false;
+                    }
+                })
                 .into(img);
         Button button = (Button)view.findViewById(R.id.call);
         button.setOnClickListener(new View.OnClickListener() {
