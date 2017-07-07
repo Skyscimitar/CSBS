@@ -24,6 +24,14 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 import static com.firebase.ui.storage.R.styleable.View;
@@ -36,6 +44,8 @@ public class ExtendedItem extends Fragment {
     Integer count =1;
     Article article;
     Geoloc geoloc;
+    User userInfos;
+    private DatabaseReference mDatabase;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -43,6 +53,8 @@ public class ExtendedItem extends Fragment {
         View view = inflater.inflate(R.layout.extended_view, container, false);
 
         geoloc = Geoloc.getInstance(getActivity());
+
+
 
         TextView descriptionExtendedView = (TextView) view.findViewById(R.id.descriptionExtendedView);
         TextView prixExtendedView = (TextView) view.findViewById(R.id.prixExtendedView);
@@ -57,7 +69,28 @@ public class ExtendedItem extends Fragment {
         prixExtendedView.setText(article.getPrix().toString() + "€");
         ImageView img = (ImageView) view.findViewById(R.id.imgView);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference("csb");
+        mDatabase.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                userInfos = snapshot.getValue(User.class);
+                if(userInfos.prenom.equals(article.getSellerName()) && userInfos.nom.equals(article.getSellerSurname())) {
+                    Button deleteButton = (Button) getActivity().findViewById(R.id.deleteItem);
+                    deleteButton.setVisibility(android.view.View.VISIBLE);
+                    deleteButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick (View v){
+                            Toast.makeText(getActivity(),"You'll soon be able to delete it",Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress);
         progressBar.setVisibility(android.view.View.VISIBLE);
