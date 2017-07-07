@@ -56,6 +56,7 @@ public class ExtendedItem extends Fragment {
 
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress);
         progressBar.setVisibility(android.view.View.VISIBLE);
+        Log.e("e",article.getStorageReference());
         Glide.with(this)
                 .load(article.getStorageReference())
                 .listener(new RequestListener<String, GlideDrawable>() {
