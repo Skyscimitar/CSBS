@@ -34,4 +34,6 @@
     <!-- addItem -->
     <string name="infoAddItem">Ce formulaire vous permet de mettre en vente un objet ou d\'emettre votre propre proposition d\'achat.</string>
 
+    <!-- extended Item -->
+    <string name="infoExtendedItem">Contacte moi dès maintenant :</string>
 </resources>
