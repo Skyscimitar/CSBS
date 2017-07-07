@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="0d0b9530510f5b63d0116abe82731d9562d38793">
-        <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6340d745b6a13d254d2e5df0bd14f9080d300586\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="/Users/Danny/AndroidStudioProjects/CSBS/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="B:\Mes Documents\progra\appli android\CSBS\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_3d8c8d24edcd9c07792d9e580f09bc3a78020bd2\classes.dex" />
+        <dex dex="/Users/Danny/AndroidStudioProjects/CSBS/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_66c16eb98e62c3f012c37ab48315109fe20a892b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Danny/AndroidStudioProjects/CSBS/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="fd27a09e861906854bb54a7ab71a056b95570408">
+        <dex dex="/Users/Danny/AndroidStudioProjects/CSBS/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c9ffe59991de64339ce0ee32d99a19b80475cceb/classes.dex" />
     </item>
 
 </items>

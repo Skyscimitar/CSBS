@@ -40,7 +40,7 @@ public class ExtendedItem extends Fragment {
 
         TextView text = (TextView) view.findViewById(R.id.description);
         text.setText(article.toString() + " " + "vendu par " + article.getSellerName() + " " + article.getSellerSurname());
-        ImageView img = (ImageView) view.findviewById(R.id.imgView);
+        ImageView img = (ImageView) view.findViewById(R.id.imgView);
         //Glide.with(this)
         //        .using(new FirebaseImageLoader())
         //        .load(article.getStorageReference())
