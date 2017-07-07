@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.Telephony;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +42,10 @@ public class ExtendedItem extends Fragment {
         TextView text = (TextView) view.findViewById(R.id.description);
         text.setText(article.toString() + " " + "vendu par " + article.getSellerName() + " " + article.getSellerSurname());
         ImageView img = (ImageView) view.findViewById(R.id.imgView);
-        //Glide.with(this)
-        //        .using(new FirebaseImageLoader())
-        //        .load(article.getStorageReference())
-         //       .into(img);
+        Glide.with(this)
+                .load(article.getStorageReference())
+                .into(img);
+        Log.e("test",article.getStorageReference());
         Button button = (Button)view.findViewById(R.id.call);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

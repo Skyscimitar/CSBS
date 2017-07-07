@@ -140,8 +140,10 @@ public class AddItem extends AppCompatActivity {
                 }
             });
         }
-        latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
-        longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+        if(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null) {
+            latitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
+            longitude = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
+        }
         final EditText description = (EditText) findViewById(R.id.item_description);
         final EditText price = (EditText) findViewById(R.id.item_price);
         final CheckBox offer = (CheckBox) findViewById(R.id.item_offer);

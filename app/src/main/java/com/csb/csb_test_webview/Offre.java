@@ -57,7 +57,6 @@ public class Offre extends ListFragment {
                     Article article = postSnapshot.getValue(Article.class);
                     article_data.add(article);
                 }
-                Log.i("test", article_data.toString());
                 List<Article> articles = article_data;
                 Article article_dat[] = new Article[articles.size()];
                 article_dat = articles.toArray(article_dat);
